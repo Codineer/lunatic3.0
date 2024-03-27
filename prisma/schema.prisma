@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String      @id @default(auto()) @map("_id") @db.ObjectId
+  userName       String      @unique
+  bio            String?
+  externalUserId String      @unique
+  playlists      Playlist[]
+  likedSongs     LikedSong[]
+}
+
+model Playlist {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  playlistName String @unique
+  likes        Int
+  ownerId      String @db.ObjectId
+  owner        User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  playlistSong PlaylistSong[]
+}
+
+model PlaylistSong {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  playlistId String   @db.ObjectId
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  songId     String   @db.ObjectId
+  song       Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+}
+
+model LikedSong {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  songId String @db.ObjectId
+  song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Song {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  imgUrl       String
+  songName     String
+  likes        Int
+  albumId      String         @db.ObjectId
+  album        Album          @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  likedSongs   LikedSong[]
+  playlistSong PlaylistSong[]
+}
+
+model Album {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  albumName String
+  likes     Int
+  imgUrl    String
+  song      Song[]
+}
