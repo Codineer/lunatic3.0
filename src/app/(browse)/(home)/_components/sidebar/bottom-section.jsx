@@ -4,7 +4,14 @@ import { useSidebar } from '@/store/use-sidebar';
 import { cn } from '@/lib/utils';
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
+import PopOverContent from "./bottom-sec-comps/pop-over-content"
 import Hint from '@/components/hint';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
 
 const BottomSection = () => {
   const { collapsed } = useSidebar(state => state)
@@ -17,9 +24,13 @@ const BottomSection = () => {
           {!collapsed &&
             <div className='text-[20px] font-medium flex justify-between w-full items-center'>
               <div>Your Library</div>
-              <Hint content={"Create new playlist"}>
-                <Plus className='cursor-pointer' />
-              </Hint>
+              <Popover><PopoverTrigger>
+                <Hint content={"Create new playlist"}>
+                  <Plus className='cursor-pointer hover:bg-[#1e1e1e] rounded-full p-1' size={30} />
+                </Hint>
+              </PopoverTrigger>
+                <PopoverContent><PopOverContent /></PopoverContent>
+              </Popover>
 
             </div>}
         </div>
