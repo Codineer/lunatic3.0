@@ -18,17 +18,17 @@ model User {
   userName       String      @unique
   bio            String?
   externalUserId String      @unique
+  imageUrl       String
   playlists      Playlist[]
   likedSongs     LikedSong[]
 }
 
 model Playlist {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
-  playlistName String @unique
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  playlistName String         @unique
   likes        Int
-  ownerId      String @db.ObjectId
-  owner        User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-
+  ownerId      String         @db.ObjectId
+  owner        User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   playlistSong PlaylistSong[]
 }
 
@@ -38,6 +38,8 @@ model PlaylistSong {
   playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
   songId     String   @db.ObjectId
   song       Song     @relation(fields: [songId], references: [id], onDelete: Cascade)
+
+  @@unique([playlistId, songId])
 }
 
 model LikedSong {
@@ -46,12 +48,14 @@ model LikedSong {
   song   Song   @relation(fields: [songId], references: [id], onDelete: Cascade)
   userId String @db.ObjectId
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, songId])
 }
 
 model Song {
   id           String         @id @default(auto()) @map("_id") @db.ObjectId
   imgUrl       String
-  songName     String
+  songName     String         @unique
   likes        Int
   albumId      String         @db.ObjectId
   album        Album          @relation(fields: [albumId], references: [id], onDelete: Cascade)
