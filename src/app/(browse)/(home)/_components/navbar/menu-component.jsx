@@ -1,7 +1,6 @@
 import React from 'react'
 import { AlignLeft } from 'lucide-react';
 import Link from 'next/link';
-import { currentUser } from '@clerk/nextjs';
 import { getSelf } from '@/lib/auth-service';
 import {
     DropdownMenu,
