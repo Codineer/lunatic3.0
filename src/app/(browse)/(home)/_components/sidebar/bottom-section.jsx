@@ -5,22 +5,24 @@ import { cn } from '@/lib/utils';
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import PopOverContent from "./bottom-sec-comps/pop-over-content"
+import { LikedSidebarSongs } from './bottom-sec-comps/liked-sidebar-songs';
+import { LikedSidebarPlaylist } from './bottom-sec-comps/likedanduser-sidebar-playlists';
 import Hint from '@/components/hint';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const BottomSection = () => {
   const { collapsed } = useSidebar(state => state)
-  const [curentList, setcurrentList] = useState(1)
+  const [currentList, setcurrentList] = useState(1)
   return (
     <div className='pt-4'>
       <div className='flex flex-col gap-3'>
         <div className={cn('flex gap-2 justify-center lg:justify-start w-full')}>
-          <LibraryBig size={30} strokeWidth={2} />
+          <LibraryBig size={30} strokeWidth={2} className='cursor-pointer' onClick={() => { setcurrentList(2) }} />
           {!collapsed &&
             <div className='text-[20px] font-medium flex justify-between w-full items-center'>
               <div>Your Library</div>
@@ -36,22 +38,25 @@ const BottomSection = () => {
         </div>
         {!collapsed && <div className='flex gap-2'>
           <Hint content={"Liked Songs"}>
-            <Button onClick={() => { setcurrentList(1) }} variant="outline" size="sm" className="rounded-full">Songs</Button>
+            <Button onClick={() => { setcurrentList(1) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 1 && "bg-[#1e1e1e]")}>Songs</Button>
           </Hint>
           <Hint content={"Liked Playlists"}>
-            <Button onClick={() => { setcurrentList(2) }} variant="outline" size="sm" className="rounded-full">Playlists</Button>
+            <Button onClick={() => { setcurrentList(2) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 2 && "bg-[#1e1e1e]")}>Playlists</Button>
           </Hint>
           <Hint content={"Liked Albums"}>
-            <Button onClick={() => { setcurrentList(3) }} variant="outline" size="sm" className="rounded-full">Albums</Button>
+            <Button onClick={() => { setcurrentList(3) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 3 && "bg-[#1e1e1e]")}>Albums</Button>
           </Hint>
 
         </div>
         }
 
       </div>
-      <div className='overflow-auto w-auto'>
+      <ScrollArea className="my-4 h-96 w-full rounded-md border-0">
 
-      </div>
+        {currentList === 1 && <LikedSidebarSongs />}
+        {currentList === 2 && <LikedSidebarPlaylist />}
+
+      </ScrollArea>
     </div>
   )
 }

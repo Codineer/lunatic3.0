@@ -14,22 +14,26 @@ datasource db {
 }
 
 model User {
-  id             String      @id @default(auto()) @map("_id") @db.ObjectId
-  userName       String      @unique
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  userName       String          @unique
   bio            String?
-  externalUserId String      @unique
+  externalUserId String          @unique
   imageUrl       String
   playlists      Playlist[]
   likedSongs     LikedSong[]
+  LikedPlaylist  LikedPlaylist[]
+  LikedAlbum     LikedAlbum[]
 }
 
 model Playlist {
-  id           String         @id @default(auto()) @map("_id") @db.ObjectId
-  playlistName String         @unique
-  likes        Int            @default(0)
-  ownerId      String         @db.ObjectId
-  owner        User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  playlistSong PlaylistSong[]
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  playlistName  String          @unique
+  coverImg      String?
+  likes         Int             @default(0)
+  ownerId       String          @db.ObjectId
+  owner         User            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  playlistSong  PlaylistSong[]
+  LikedPlaylist LikedPlaylist[]
 }
 
 model PlaylistSong {
@@ -52,6 +56,26 @@ model LikedSong {
   @@unique([userId, songId])
 }
 
+model LikedPlaylist {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  playlistId String   @db.ObjectId
+  playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, playlistId])
+}
+
+model LikedAlbum {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  albumId String @db.ObjectId
+  album   Album  @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  userId  String @db.ObjectId
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, albumId])
+}
+
 model Song {
   id           String         @id @default(auto()) @map("_id") @db.ObjectId
   imgUrl       String
@@ -64,9 +88,10 @@ model Song {
 }
 
 model Album {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  albumName String
-  likes     Int
-  imgUrl    String
-  song      Song[]
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  albumName  String
+  likes      Int          @default(0)
+  imgUrl     String
+  song       Song[]
+  LikedAlbum LikedAlbum[]
 }

@@ -9,10 +9,10 @@ const PopOverContent = () => {
     const [isPending, startTransition] = useTransition();
     const createPlaylistOnClick = () => {
         startTransition(async () => {
-            if (!data) {
-                return
-            }
             try {
+                if (!data) {
+                    return
+                }
                 const playlist = await createPlaylist(data)
                 toast.success(`Playlist ${playlist.playlistName} Created!`)
             } catch {

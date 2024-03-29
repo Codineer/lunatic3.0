@@ -7,7 +7,6 @@ const HomeLayout = ({ children }) => {
       <Sidebar />
       <div className='w-full bg-[#121212]'>
         <Navbar>
-
         </Navbar>
 
         {children}
