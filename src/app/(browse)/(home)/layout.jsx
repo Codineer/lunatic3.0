@@ -3,7 +3,7 @@ import Sidebar from './_components/sidebar'
 import Navbar from './_components/navbar'
 const HomeLayout = ({ children }) => {
   return (
-    <div className='w-screen h-screen flex p-2 gap-2 bg-black'>
+    <div className='w-screen h-screen flex p-2 gap-2 bg-black overflow-y-hidden'>
       <Sidebar />
       <div className='w-full bg-[#121212]'>
         <Navbar>

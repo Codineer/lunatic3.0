@@ -80,7 +80,9 @@ model Song {
   id           String         @id @default(auto()) @map("_id") @db.ObjectId
   imgUrl       String
   songName     String         @unique
-  likes        Int
+  songUrl      String         @unique
+  artist       String
+  likes        Int            @default(0)
   albumId      String         @db.ObjectId
   album        Album          @relation(fields: [albumId], references: [id], onDelete: Cascade)
   likedSongs   LikedSong[]

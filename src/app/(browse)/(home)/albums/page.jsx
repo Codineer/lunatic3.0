@@ -1,8 +1,7 @@
 import { AlbumCards } from './album-cards'
 import { getAllAlbums } from '@/lib/albums-service'
-const Album = async () => {
+const Albums = async () => {
   const allAlbums = await getAllAlbums()
-  console.log(allAlbums)
   return (
     <>
       <h1 className='text-2xl font-semibold p-2'>All Albums</h1>
@@ -11,4 +10,4 @@ const Album = async () => {
   )
 }
 
-export default Album
+export default Albums
