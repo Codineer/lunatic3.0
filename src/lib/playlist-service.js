@@ -42,7 +42,8 @@ export const getLikedPlaylistsFromDatabase = async () => {
             userId: self.id
         },
         include: {
-            user: true
+            user: true,
+            playlist: true
         }
     })
 

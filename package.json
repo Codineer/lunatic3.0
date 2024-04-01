@@ -22,6 +22,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
+    "cloudinary": "^2.1.0",
     "clsx": "^2.1.0",
     "lucide-react": "^0.363.0",
     "mongodb": "^6.5.0",

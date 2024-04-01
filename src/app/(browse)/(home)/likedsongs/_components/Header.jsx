@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Image from 'next/image'
-import { Play, Heart, Circle } from 'lucide-react';
+import { Play, Circle } from 'lucide-react';
 
 
 export const Header = ({ username, length }) => {

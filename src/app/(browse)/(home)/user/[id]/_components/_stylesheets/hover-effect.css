@@ -1,0 +1,5 @@
+.parent:hover .child {
+    /* CSS styles for child components when parent is hovered */
+    transform: scale(1.03);
+    box-shadow: rgb(18, 18, 18) 3px 3px 20px 3px
+}

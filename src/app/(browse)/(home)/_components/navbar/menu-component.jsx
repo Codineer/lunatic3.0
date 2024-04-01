@@ -18,11 +18,11 @@ const Menu = async () => {
             <DropdownMenu>
                 <DropdownMenuTrigger className='focus:border-0 active:border-0'><EllipsisIcon size={30} /></DropdownMenuTrigger>
                 <DropdownMenuContent className="rounded-sm bg-[#1e1e1e] border-0 shadow-black">
-                    <DropdownMenuLabel className="cursor-pointer">
-                        <Link href={`/user/${User.userName}`}>
+                    <Link href={`/user/${User.externalUserId}`}>
+                        <DropdownMenuLabel className="cursor-pointer">
                             Profile
-                        </Link>
-                    </DropdownMenuLabel>
+                        </DropdownMenuLabel>
+                    </Link>
                     <DropdownMenuSeparator />
                     <Link href={"/albums"}>
                         <DropdownMenuItem className="cursor-pointer">
@@ -35,15 +35,16 @@ const Menu = async () => {
                         <DropdownMenuItem className="cursor-pointer" ><ListMusic size={17} className='mr-2' />Liked Albums</DropdownMenuItem>
 
                     </Link>
-
-                    <DropdownMenuItem className="cursor-pointer"><AudioLines size={17} className='mr-2' />Your Playlists</DropdownMenuItem>
+                    <Link href={`/user/${User.externalUserId}`}>
+                        <DropdownMenuItem className="cursor-pointer"><AudioLines size={17} className='mr-2' />Your Playlists</DropdownMenuItem>
+                    </Link>
                     <Link href={"/likedsongs"}>
                         <DropdownMenuItem className="cursor-pointer"><Disc3 size={17} className='mr-2' />Liked Songs</DropdownMenuItem>
                     </Link>
                     <CreatePlaylist padding={0} />
 
                 </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu >
 
         </>
     )

@@ -10,7 +10,6 @@ export const LikedSidebarPlaylist = () => {
     const collapsed = useSidebar(state => state.collapsed)
     const retreivePlaylists = async () => {
         const [userPlaylists, likedPlaylists] = await getUserAndLikedPlaylists()
-        console.log(userPlaylists, likedPlaylists)
         setUserPlaylists(userPlaylists)
         setLikedPlaylists(likedPlaylists)
 

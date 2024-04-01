@@ -19,17 +19,19 @@ const TopSection = () => {
             <Image src="/images/logo.png" alt="Lunatic" height="120" width="120" className='mb-3 cursor-pointer' />
           </Link>
         }
-        <div className='flex gap-2 text-[17px] w-full p-3 font-medium hover:bg-[#1e1e1e] transition-all rounded-sm cursor-pointer'>
+        <Link href={"/"}>
+          <div className='flex gap-2 text-[17px] w-full p-3 font-medium hover:bg-[#1e1e1e] transition-all rounded-sm cursor-pointer'>
 
-          <Link href={"/"}>
             <Home />
-          </Link>
-          {!collapsed && "Home"}
-        </div>
-        <div className='flex gap-2 text-[17px] w-full p-3 font-medium hover:bg-[#1e1e1e] transition-all rounded-sm cursor-pointer'>
-          <Heart />
-          {!collapsed && "Liked Songs"}
-        </div>
+            {!collapsed && "Home"}
+          </div>
+        </Link>
+        <Link href={"/likedsongs"}>
+          <div className='flex gap-2 text-[17px] w-full p-3 font-medium hover:bg-[#1e1e1e] transition-all rounded-sm cursor-pointer'>
+            <Heart />
+            {!collapsed && "Liked Songs"}
+          </div>
+        </Link>
 
       </div>
 
