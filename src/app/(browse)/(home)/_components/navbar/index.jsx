@@ -3,9 +3,9 @@ import { UserButton } from '@clerk/nextjs'
 import Menu from './menu-component';
 import PreviousButton from './previous-button';
 import { currentUser } from '@clerk/nextjs';
+
 const Navbar = async () => {
     const user = await currentUser()
-
     return (
         <div className='bg-transparent flex p-4 justify-between'>
             <div className='flex gap-2 items-center'>

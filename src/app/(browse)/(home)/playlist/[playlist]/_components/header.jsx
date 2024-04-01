@@ -2,18 +2,16 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Circle, Play, Heart } from 'lucide-react';
-import { likeCurrentAlbum, unlikeCurrentAlbum } from '@/actions/like-album'
+import { likeCurrentPlaylist, unlikeCurrentPlaylist } from '@/actions/like-playlist';
 import { toast } from 'sonner';
 
-export const Header = ({ album, length, isliked }) => {
+export const Header = ({ playlist, length, isliked }) => {
     const [isLiked, setIsLiked] = useState(isliked)
     const like = () => {
-        likeCurrentAlbum(album.id).then(val => val ? (toast.success("Added to liked albums!"), setIsLiked(true)) : toast.error("Something went wrong!"))
-
+        likeCurrentPlaylist(playlist.id, playlist.playlistName).then(val => val ? (toast.success("Added to liked Playlists!"), setIsLiked(true)) : (toast.error("Something went wrong!")))
     }
     const unlike = () => {
-        unlikeCurrentAlbum(album.id).then(val => val ? (toast.success("removed from liked albums!"), setIsLiked(false)) : toast.error("Something went wrong!"))
-
+        unlikeCurrentPlaylist(playlist.id, playlist.playlistName).then(val => val ? (toast.success("removed from liked Playlists!"), setIsLiked(false)) : toast.error("Something went wrong!"))
     }
     return (
         <>
@@ -22,21 +20,21 @@ export const Header = ({ album, length, isliked }) => {
                 <div className='w-auto'>
                     <div className='w-32 h-32 lg:h-48 lg:w-48   relative'>
 
-                        <Image src={album.imgUrl} layout="fill"
+                        <Image src={'/images/playlistcoverimg.png'} layout="fill"
                             objectFit="cover" alt="lunatic" className='transition-all shadow-lg shadow-black rounded-md ' />
                     </div>
 
                 </div>
                 <div className='flex flex-col justify-end'>
                     <div className=''>
-                        Album
+                        Playlist
                     </div>
                     <div className='text-[48px]'>
-                        {album.albumName}
+                        {playlist.playlistName}
                     </div>
                     <div className='flex items-center gap-2 '>
-                        {length}{length > 1 ? " songs" : " song"}<Circle size={5} strokeWidth={50} className='rounded-full' />
-                        {album.likes} likes
+                        {playlist.owner.userName.slice(0, 1).toUpperCase() + playlist.owner.userName.slice(1)}<Circle size={5} strokeWidth={50} className='rounded-full' />{length}{length > 1 ? " songs" : " song"}<Circle size={5} strokeWidth={50} className='rounded-full' />
+                        {playlist.likes} likes
                     </div>
                 </div>
 

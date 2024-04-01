@@ -1,5 +1,5 @@
 import React from 'react'
-import { AlignLeft } from 'lucide-react';
+import { EllipsisIcon, ListMusic, AudioLines, Disc3, Library, Plus } from 'lucide-react';
 import Link from 'next/link';
 import { getSelf } from '@/lib/auth-service';
 import {
@@ -10,28 +10,38 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import CreatePlaylist from '@/components/create-playlist';
 const Menu = async () => {
     const User = await getSelf()
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger><AlignLeft size={30} /></DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <DropdownMenuLabel>
+                <DropdownMenuTrigger className='focus:border-0 active:border-0'><EllipsisIcon size={30} /></DropdownMenuTrigger>
+                <DropdownMenuContent className="rounded-sm bg-[#1e1e1e] border-0 shadow-black">
+                    <DropdownMenuLabel className="cursor-pointer">
                         <Link href={`/user/${User.userName}`}>
                             Profile
                         </Link>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                        <Link href={"/albums"}>
-                            All Albums
-                        </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>Liked Albums</DropdownMenuItem>
+                    <Link href={"/albums"}>
+                        <DropdownMenuItem className="cursor-pointer">
+                            <Library size={17} className='mr-2' />
 
-                    <DropdownMenuItem>Your Playlists</DropdownMenuItem>
-                    <DropdownMenuItem>Liked Songs</DropdownMenuItem>
+                            All Albums
+                        </DropdownMenuItem>
+                    </Link>
+                    <Link href={'/likedalbums'}>
+                        <DropdownMenuItem className="cursor-pointer" ><ListMusic size={17} className='mr-2' />Liked Albums</DropdownMenuItem>
+
+                    </Link>
+
+                    <DropdownMenuItem className="cursor-pointer"><AudioLines size={17} className='mr-2' />Your Playlists</DropdownMenuItem>
+                    <Link href={"/likedsongs"}>
+                        <DropdownMenuItem className="cursor-pointer"><Disc3 size={17} className='mr-2' />Liked Songs</DropdownMenuItem>
+                    </Link>
+                    <CreatePlaylist padding={0} />
+
                 </DropdownMenuContent>
             </DropdownMenu>
 

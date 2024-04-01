@@ -9,7 +9,7 @@ export const createPlaylistInDatabase = async (name) => {
         }
     })
     if (existingPlaylist) {
-        throw new Error('Already Blocked')
+        throw new Error('Already created')
     }
     const playlist = await db.playlist.create({
         data: {
@@ -50,3 +50,71 @@ export const getLikedPlaylistsFromDatabase = async () => {
 }
 
 
+
+export const addSongInPlaylist = async (playlist, songId) => {
+    try {
+        const user = await getSelf()
+        if (playlist.ownerId !== user.id) {
+            return false
+        }
+        const song = await db.playlistSong.findUnique(
+            {
+                where: {
+                    playlistId_songId: {
+                        playlistId: playlist.id,
+                        songId: songId
+                    }
+                }
+            }
+        )
+
+        if (song) {
+            return false
+        }
+        const playlistSong = await db.playlistSong.create(
+            {
+                data: {
+                    playlistId: playlist.id,
+                    songId: songId
+                }
+            }
+        )
+        return true
+    }
+    catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
+export const getPlaylistByName = async (playlistName) => {
+    const playlist = await db.playlist.findUnique(
+        {
+            where: {
+
+                playlistName: playlistName
+            },
+            include: {
+                owner: true
+            }
+        }
+    )
+    return playlist
+}
+
+export const getSongsfromPlaylist = async (playlistId) => {
+    const songs = await db.playlistSong.findMany(
+        {
+            where: { playlistId: playlistId },
+            select: {
+                song: {
+                    include: {
+                        album: true
+                    }
+                }
+            }
+
+        },
+    )
+    return songs
+}

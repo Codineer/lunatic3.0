@@ -1,4 +1,4 @@
-import { AlbumCards } from './album-cards'
+import { AlbumCards } from '../_components/album-cards'
 import { getAllAlbums } from '@/lib/albums-service'
 const Albums = async () => {
   const allAlbums = await getAllAlbums()

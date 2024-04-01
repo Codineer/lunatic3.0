@@ -1,7 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
-import { Heart, EllipsisVertical, Disc3, PlusIcon, AudioLines, Plus } from 'lucide-react'
+import { useState } from 'react'
+import { EllipsisVertical, Disc3, PlusIcon, AudioLines, Heart } from 'lucide-react'
 import { likeCurrentSong } from '@/actions/like-song'
 import { unlikeCurrentSong } from '@/actions/like-song'
 import { addSong } from '@/actions/addsongplaylist'
@@ -11,15 +12,15 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
+import { useSidebar } from '@/store/use-sidebar'
 export const SongCard = ({ index, song, playlists }) => {
     const [isLiked, setIsLiked] = useState(song.isliked)
     const currentUrl = window.location.href;
     const albumid = currentUrl.split('/').pop();
+    const { collapsed } = useSidebar(state => state)
     const like = async () => {
         const val = await likeCurrentSong(song.id, albumid)
         if (val) {
@@ -28,7 +29,6 @@ export const SongCard = ({ index, song, playlists }) => {
         }
         else {
             toast.error("Something went wrong!")
-
         }
     }
     const unlike = async () => {
@@ -74,14 +74,20 @@ export const SongCard = ({ index, song, playlists }) => {
                     <Heart className='' size={17} color={isLiked ? "red" : "white"} onClick={isLiked ? unlike : like} fill={isLiked ? "red" : ""} />
                 </div>
 
+
             </div>
-            <div className='w-[40px]'>{song.likes}</div>
+            {!collapsed &&
+                <div className='w-[250px] p-2'>
+                    {song.album.albumName}
+                </div>
+            }
+            <div className='w-[40px] p-1'>{song.likes}</div>
             <div className='w-[60px]'>{song.duration}</div>
             <div className='w-[10px]'>
                 <DropdownMenu>
                     <DropdownMenuTrigger className='focus:border-0 active:border-0'><EllipsisVertical size={17} className='cursor-pointer' /></DropdownMenuTrigger>
                     <DropdownMenuContent className="rounded-sm bg-[#1e1e1e] border-0 shadow-black">
-                        <DropdownMenuItem className="flex items-center cursor-pointer gap-2" onClick={isLiked ? unlike : like}>
+                        <DropdownMenuItem className="flex items-center cursor-pointer gap-2" onClick={unlike}>
                             <div className='p-1 rounded-full  cursor-pointer w-auto'>
 
                                 <Disc3 size={17} className='' />

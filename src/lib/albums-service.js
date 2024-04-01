@@ -1,3 +1,4 @@
+import { getSelf } from "./auth-service";
 import { db } from "./db";
 export const getAllAlbums = async () => {
     const Albums = await db.album.findMany({
@@ -21,4 +22,17 @@ export const getSongsInAlbum = async (id) => {
         }
     })
     return songs
+}
+
+export const getlikedAlbums = async () => {
+    const user = await getSelf()
+    const Albums = await db.likedAlbum.findMany({
+        where: {
+            userId: user.id
+        },
+        include: {
+            album: true
+        }
+    })
+    return Albums
 }
