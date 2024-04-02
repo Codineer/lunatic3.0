@@ -3,8 +3,25 @@ import React from 'react'
 import { Heart, Clock, Hash } from 'lucide-react'
 import { SongCard } from './song-card'
 import { useSidebar } from '@/store/use-sidebar'
+import { useCurrentSong } from '@/store/use-current-song'
+import { useCurrentSongObject } from '@/store/use-current-songList'
 export const Songs = ({ songs, playlists }) => {
     const { collapsed } = useSidebar(state => state)
+    const { currentSong, setCurrentSong } = useCurrentSong(state => state)
+    const { currentSongObject, setCurrentSongObject } = useCurrentSongObject(state => state)
+    const changeCurrentSongobject = (song) => {
+        if (currentSong.id === song.id) {
+            return
+        }
+        if (currentSongObject.id !== "liked_song123") {
+            setCurrentSongObject({ id: "liked_song123", list: songs })
+            setCurrentSong(song)
+            return
+        }
+        if (currentSongObject.id === "liked_song123") {
+            setCurrentSong(song)
+        }
+    }
     return (
 
         <div className='m-4'>
@@ -20,9 +37,10 @@ export const Songs = ({ songs, playlists }) => {
                 <div className='w-[60px]'><Clock size={15} /></div>
                 <div className='w-[10px]'></div>
             </div>
-            <div className='mt-3'>
-                {songs.map((song, index) =>
+            <div className='mt-3 flex flex-col gap-2'>
+                {songs.map((song, index) => <div onClick={() => changeCurrentSongobject(song)} className='cursor-pointer'>
                     <SongCard key={song.id} index={index + 1} song={song} playlists={playlists} />
+                </div>
                 )}
             </div>
         </div>

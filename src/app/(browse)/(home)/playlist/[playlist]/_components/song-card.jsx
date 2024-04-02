@@ -22,6 +22,7 @@ export const SongCard = ({ index, song, playlists }) => {
     const albumid = currentUrl.split('/').pop();
     const { collapsed } = useSidebar(state => state)
     const like = async () => {
+        e.stopPropagation();
         const val = await likeCurrentSong(song.id, albumid)
         if (val) {
             toast.success("Added to liked song!")
@@ -31,7 +32,8 @@ export const SongCard = ({ index, song, playlists }) => {
             toast.error("Something went wrong!")
         }
     }
-    const unlike = async () => {
+    const unlike = async (e) => {
+        e.stopPropagation();
         const val = await unlikeCurrentSong(song.id, albumid)
         if (val) {
             toast.success("Removed from liked song!")

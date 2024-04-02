@@ -2,10 +2,23 @@
 import React from 'react'
 import Image from 'next/image'
 import { Play, Circle } from 'lucide-react';
+import { useCurrentSong } from '@/store/use-current-song';
+import { useCurrentSongObject } from '@/store/use-current-songList';
 
+export const Header = ({ username, length, songs }) => {
+    const { currentSong, setCurrentSong } = useCurrentSong(state => state)
+    const { currentSongObject, setCurrentSongObject } = useCurrentSongObject(state => state)
+    const playAllSongs = () => {
+        // if (currentSong.id === song.id) {
+        //     return
+        // }
+        if (currentSongObject.id !== "liked_song123") {
+            setCurrentSongObject({ id: "liked_song123", list: songs })
+            setCurrentSong(songs[0])
+            return
+        }
 
-export const Header = ({ username, length }) => {
-
+    }
     return (
         <>
 
@@ -35,7 +48,7 @@ export const Header = ({ username, length }) => {
             </div>
             <div className='flex gap-3 items-center   mx-4' >
 
-                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer"  >
+                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer" onClick={playAllSongs} >
                     <Play color='black' size={30} strokeWidth={1.5} fill="black" />
                 </div>
 

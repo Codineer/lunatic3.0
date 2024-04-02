@@ -12,16 +12,32 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { useCurrentSong } from '@/store/use-current-song'
+import { useCurrentSongObject } from '@/store/use-current-songList'
 
-
-export const Header = ({ playlist, length, isliked }) => {
+export const Header = ({ playlist, length, isliked, songs }) => {
 
     const [isLiked, setIsLiked] = useState(isliked)
-    const like = () => {
+    const { currentSong, setCurrentSong } = useCurrentSong(state => state)
+    const { currentSongObject, setCurrentSongObject } = useCurrentSongObject(state => state)
+    const like = (e) => {
+        e.stopPropagation(e);
         likeCurrentPlaylist(playlist.id, playlist.playlistName).then(val => val ? (toast.success("Added to liked Playlists!"), setIsLiked(true)) : (toast.error("Something went wrong!")))
     }
-    const unlike = () => {
+    const unlike = (e) => {
+        e.stopPropagation(e);
         unlikeCurrentPlaylist(playlist.id, playlist.playlistName).then(val => val ? (toast.success("removed from liked Playlists!"), setIsLiked(false)) : toast.error("Something went wrong!"))
+    }
+    const playAllSongs = () => {
+        // if (currentSong.id === song.id) {
+        //     return
+        // }
+        if (currentSongObject.id !== playlist.id) {
+            setCurrentSongObject({ id: playlist.id, list: songs })
+            setCurrentSong(songs[0])
+            return
+        }
+
     }
     return (
         <>
@@ -45,7 +61,7 @@ export const Header = ({ playlist, length, isliked }) => {
                             </DialogContent>
 
                         </Dialog>
-                        <Image src={'/images/playlistcoverimg.png'} layout="fill"
+                        <Image src={playlist.coverImg ? playlist.coverImg : '/images/playlistcoverimg.png'} layout="fill"
                             objectFit="cover" alt="lunatic" className='transition-all shadow-lg shadow-black rounded-md ' />
                     </div>
 
@@ -64,9 +80,9 @@ export const Header = ({ playlist, length, isliked }) => {
                 </div>
 
             </div >
-            <div className='flex gap-3 items-center   mx-4' >
+            <div className='flex gap-3 items-center  mx-4' >
 
-                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer"  >
+                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer" onClick={playAllSongs} >
                     <Play color='black' size={30} strokeWidth={1.5} fill="black" />
                 </div>
 

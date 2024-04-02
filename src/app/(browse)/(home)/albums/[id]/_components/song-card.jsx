@@ -20,7 +20,8 @@ export const SongCard = ({ index, song, playlists }) => {
     const [isLiked, setIsLiked] = useState(song.isliked)
     const currentUrl = window.location.href;
     const albumid = currentUrl.split('/').pop();
-    const like = async () => {
+    const like = async (e) => {
+        e.stopPropagation();
         const val = await likeCurrentSong(song.id, albumid)
         if (val) {
             toast.success("Added to liked song!")
@@ -31,7 +32,8 @@ export const SongCard = ({ index, song, playlists }) => {
 
         }
     }
-    const unlike = async () => {
+    const unlike = async (e) => {
+        e.stopPropagation();
         const val = await unlikeCurrentSong(song.id, albumid)
         if (val) {
             toast.success("Removed from liked song!")

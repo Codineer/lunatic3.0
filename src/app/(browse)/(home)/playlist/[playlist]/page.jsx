@@ -13,8 +13,8 @@ const Playlist = async ({ params }) => {
     const islikedPlaylist = await isLikedPlaylist(playlist.id)
     return (
         <div>
-            <Header playlist={playlist} length={songs.length} isliked={islikedPlaylist} />
-            <Songs songs={songs} playlists={playlists} />
+            <Header playlist={playlist} length={songs.length} isliked={islikedPlaylist} songs={songs} />
+            <Songs songs={songs} playlists={playlists} playlist={playlist} />
         </div>
     )
 }

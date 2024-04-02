@@ -7,6 +7,8 @@ import {
     getLikedSongsFromDataBase
 } from '@/lib/like-service'
 import { fetchAndUpdateDurations } from '@/utils/fetch-update-durations'
+import { Suspense } from 'react'
+import { ChildrenSkeleton } from '@/components/children-skeleton'
 const LikedSongs = async () => {
     const user = await currentUser()
     const LikedSongs = await getLikedSongsFromDataBase()
@@ -14,8 +16,11 @@ const LikedSongs = async () => {
     const playlists = await getUserPlaylistsFromDatabase()
     return (
         <div>
-            <Header username={user.username} length={songs.length} />
-            <Songs songs={songs} playlists={playlists} />
+            <Suspense fallback={<ChildrenSkeleton />}>
+                <Header username={user.username} length={songs.length} songs={songs} />
+                <Songs songs={songs} playlists={playlists} />
+
+            </Suspense>
         </div>
     )
 }

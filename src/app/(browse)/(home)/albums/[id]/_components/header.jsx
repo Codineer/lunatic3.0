@@ -4,15 +4,29 @@ import Image from 'next/image'
 import { Circle, Play, Heart } from 'lucide-react';
 import { likeCurrentAlbum, unlikeCurrentAlbum } from '@/actions/like-album'
 import { toast } from 'sonner';
-
-export const Header = ({ album, length, isliked }) => {
+import { useCurrentSong } from '@/store/use-current-song';
+import { useCurrentSongObject } from '@/store/use-current-songList';
+export const Header = ({ album, length, isliked, songs }) => {
     const [isLiked, setIsLiked] = useState(isliked)
+    const { currentSong, setCurrentSong } = useCurrentSong(state => state)
+    const { currentSongObject, setCurrentSongObject } = useCurrentSongObject(state => state)
     const like = () => {
         likeCurrentAlbum(album.id).then(val => val ? (toast.success("Added to liked albums!"), setIsLiked(true)) : toast.error("Something went wrong!"))
 
     }
     const unlike = () => {
         unlikeCurrentAlbum(album.id).then(val => val ? (toast.success("removed from liked albums!"), setIsLiked(false)) : toast.error("Something went wrong!"))
+
+    }
+    const playAllSongs = () => {
+        // if (currentSong.id === song.id) {
+        //     return
+        // }
+        if (currentSongObject.id !== album.id) {
+            setCurrentSongObject({ id: album.id, list: songs })
+            setCurrentSong(songs[0])
+            return
+        }
 
     }
     return (
@@ -43,7 +57,7 @@ export const Header = ({ album, length, isliked }) => {
             </div>
             <div className='flex gap-3 items-center   mx-4' >
 
-                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer"  >
+                <div className="right-4 rounded-full bg-white p-3  border-white cursor-pointer" onClick={playAllSongs} >
                     <Play color='black' size={30} strokeWidth={1.5} fill="black" />
                 </div>
 
