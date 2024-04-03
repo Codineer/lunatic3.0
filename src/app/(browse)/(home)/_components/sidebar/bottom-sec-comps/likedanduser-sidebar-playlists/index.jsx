@@ -3,6 +3,7 @@ import { useSidebar } from '@/store/use-sidebar'
 import { useEffect, useState } from 'react'
 import { getUserAndLikedPlaylists } from '@/actions/get-userandlikedplaylists-for-sidebar'
 import Playlistcard from './playlist-card'
+import Link from 'next/link'
 
 export const LikedSidebarPlaylist = () => {
     const [userPlaylists, setUserPlaylists] = useState([])
@@ -23,7 +24,14 @@ export const LikedSidebarPlaylist = () => {
         <div>
             {!collapsed && userPlaylists.length > 0 && <h1 className='pb-2 text-xl font-medium'>Your Playlists</h1>}
             <div>
-                {userPlaylists.map(playlist => <Playlistcard key={playlist.id} playlist={playlist} />)}
+
+                {userPlaylists.map(playlist =>
+                    <Link href={`/playlist/${playlist.playlistName}`}>
+
+                        <Playlistcard key={playlist.id} playlist={playlist} />
+                    </Link>)}
+
+
             </div>
 
 

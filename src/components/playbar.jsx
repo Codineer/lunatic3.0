@@ -49,7 +49,7 @@ export const Playbar = () => {
         })
     }
     return (
-        <div className='w-full  bottom-0 p-2 flex justify-center bg-[#1D1B1B] items-center z-20 absolute'>
+        <div className='w-full  bottom-0 p-2 flex justify-center bg-[#1D1B1B] items-center z-20 fixed'>
             {currentSong.imgUrl &&
                 <div className='w-24 h-24 lg:h-48 lg:w-48  absolute bottom-[110%] left-2 z-50'>
 

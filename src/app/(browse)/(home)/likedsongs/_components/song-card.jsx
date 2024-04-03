@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useSidebar } from '@/store/use-sidebar'
 export const SongCard = ({ index, song, playlists }) => {
-    const currentUrl = window.location.href;
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const albumid = currentUrl.split('/').pop();
     const { collapsed } = useSidebar(state => state)
 
