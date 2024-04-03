@@ -21,7 +21,7 @@ export const SongCard = ({ index, song, playlists }) => {
     const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const albumid = currentUrl.split('/').pop();
     const { collapsed } = useSidebar(state => state)
-    const like = async () => {
+    const like = async (e) => {
         e.stopPropagation();
         const val = await likeCurrentSong(song.id, albumid)
         if (val) {

@@ -15,7 +15,7 @@ import {
 import { useCurrentSong } from '@/store/use-current-song'
 import { useCurrentSongObject } from '@/store/use-current-songList'
 
-export const Header = ({ playlist, length, isliked, songs }) => {
+export const Header = ({ playlist, length, isliked, songs, isCreator }) => {
 
     const [isLiked, setIsLiked] = useState(isliked)
     const { currentSong, setCurrentSong } = useCurrentSong(state => state)
@@ -45,22 +45,23 @@ export const Header = ({ playlist, length, isliked, songs }) => {
             <div className='flex m-4 gap-4'>
                 <div className='w-auto'>
                     <div className='w-32 h-32 lg:h-48 lg:w-48   relative'>
-                        <Dialog>
-                            <DialogTrigger>
-                                <div className='absolute top-2 left-2 z-10 p-2 hover:bg-white hover:bg-opacity-10 rounded-full cursor-pointer'>
-                                    <Plus size={25} strokeWidth={2} />
+                        {isCreator &&
+                            <Dialog>
+                                <DialogTrigger>
+                                    <div className='absolute top-2 left-2 z-10 p-2 hover:bg-white hover:bg-opacity-10 rounded-full cursor-pointer'>
+                                        <Plus size={25} strokeWidth={2} />
 
-                                </div>
+                                    </div>
 
-                            </DialogTrigger>
-                            <DialogContent>
-                                <DialogHeader>
-                                    <DialogTitle className="pb-4">Upload Cover Image </DialogTitle>
-                                    <DialogDesc />
-                                </DialogHeader>
-                            </DialogContent>
+                                </DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle className="pb-4">Upload Cover Image </DialogTitle>
+                                        <DialogDesc />
+                                    </DialogHeader>
+                                </DialogContent>
 
-                        </Dialog>
+                            </Dialog>}
                         <Image src={playlist.coverImg ? playlist.coverImg : '/images/playlistcoverimg.png'} layout="fill"
                             objectFit="cover" alt="lunatic" className='transition-all shadow-lg shadow-black rounded-md ' />
                     </div>

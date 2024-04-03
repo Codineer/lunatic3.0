@@ -10,7 +10,7 @@ export const AlbumCards = ({ albums }) => {
 
         <div className='flex flex-wrap gap-2 justify-start pl-2 sm:pl-2 lg:gap-7 lg:p-3'>
             {albums.map((album, index) => (
-                <Link href={`/albums/${album.id}`}>
+                <Link href={`/albums/${album.id}`} key={album.id}>
                     <div className="parent relative w-auto rounded-lg bg-[#1e1e1e] p-2 flex flex-col gap-2 hover:bg-[#272727] transition-all cursor-pointer" onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)}>
                         {hovered === index &&
                             <div className="child absolute z-50 bottom-[60px] right-4 rounded-full bg-[#21201e] p-2 transition-all border border-white"  >

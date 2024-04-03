@@ -13,7 +13,7 @@ export const UserPlaylists = ({ playlists }) => {
                 {playlists.map((playlist, index) => {
 
                     return (
-                        <Link href={`/playlist/${playlist.playlistName}`}>
+                        <Link href={`/playlist/${playlist.playlistName}`} key={playlist.id}>
                             <div className="parent relative w-auto rounded-lg bg-[#1e1e1e] p-2 flex flex-col gap-2 hover:bg-[#272727] transition-all cursor-pointer" onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)}>
                                 {hovered === index &&
                                     <div className="child absolute z-50 bottom-[60px] right-4 rounded-full bg-[#21201e] p-2 transition-all border border-white"  >

@@ -26,9 +26,9 @@ export const LikedSidebarPlaylist = () => {
             <div>
 
                 {userPlaylists.map(playlist =>
-                    <Link href={`/playlist/${playlist.playlistName}`}>
+                    <Link href={`/playlist/${playlist.playlistName}`} key={playlist.id} >
 
-                        <Playlistcard key={playlist.id} playlist={playlist} />
+                        <Playlistcard playlist={playlist} />
                     </Link>)}
 
 
