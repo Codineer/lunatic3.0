@@ -39,8 +39,8 @@ export const Songs = ({ songs, playlists, playlist }) => {
             </div>
             <div className='mt-3 flex flex-col gap-2'>
                 {songs.map((song, index) =>
-                    <div onClick={() => changeCurrentSongobject(song)} className='cursor-pointer'>
-                        <SongCard key={song.id} index={index + 1} song={song} playlists={playlists} />
+                    <div key={song.id} onClick={() => changeCurrentSongobject(song)} className='cursor-pointer'>
+                        <SongCard index={index + 1} song={song} playlists={playlists} />
                     </div>
                 )}
             </div>

@@ -1,4 +1,4 @@
-import { isLikedSong, isLikedAlbum } from "@/lib/like-service";
+import { isLikedSong } from "@/lib/like-service";
 
 export const checkIslikedSong = async (songs) => {
     for (const song of songs) {

@@ -28,7 +28,7 @@ export const LikedSidebarPlaylist = () => {
 
 
 
-            {!collapsed && likedPlaylists.length > 0 && <h1 h1 className='py-2 text-xl font-medium'>Liked Playlists</h1>}
+
 
         </div>
 

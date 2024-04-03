@@ -22,7 +22,7 @@ const BottomSection = () => {
     <div className='pt-4'>
       <div className='flex flex-col gap-3'>
         <div className={cn('flex gap-2 justify-center lg:justify-start w-full')}>
-          <LibraryBig size={30} strokeWidth={2} className='cursor-pointer' onClick={() => { setcurrentList(2) }} />
+          <LibraryBig size={30} strokeWidth={2} className='cursor-pointer' onClick={() => { setcurrentList(1) }} />
           {!collapsed &&
             <div className='text-[20px] font-medium flex justify-between w-full items-center'>
               <div>Your Library</div>
@@ -43,9 +43,9 @@ const BottomSection = () => {
           <Hint content={"Liked Playlists"}>
             <Button onClick={() => { setcurrentList(2) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 2 && "bg-[#1e1e1e]")}>Playlists</Button>
           </Hint>
-          <Hint content={"Liked Albums"}>
+          {/* <Hint content={"Liked Albums"}>
             <Button onClick={() => { setcurrentList(3) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 3 && "bg-[#1e1e1e]")}>Albums</Button>
-          </Hint>
+          </Hint> */}
 
         </div>
         }

@@ -1,9 +1,7 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import { ThemeProvider } from "@/components/theme-provider"
-import { Inter } from "next/font/google";
 import { Toaster } from 'sonner'
 import "./globals.css";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +13,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body>
-        <ThemeProvider
+          <ThemeProvider
             attribute="class"
             forcedTheme='dark'
             storageKey='gamehub-theme'
@@ -23,7 +21,7 @@ export default function RootLayout({ children }) {
             <Toaster theme="light" position='bottom-center' />
             {children}
           </ThemeProvider>
-          </body>
+        </body>
       </html>
     </ClerkProvider>
   );

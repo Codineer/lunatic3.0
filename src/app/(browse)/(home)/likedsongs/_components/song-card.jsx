@@ -19,15 +19,7 @@ export const SongCard = ({ index, song, playlists }) => {
     const currentUrl = window.location.href;
     const albumid = currentUrl.split('/').pop();
     const { collapsed } = useSidebar(state => state)
-    const like = async () => {
-        const val = await likeCurrentSong(song.id, albumid)
-        if (val) {
-            toast.success("Added to liked song!")
-        }
-        else {
-            toast.error("Something went wrong!")
-        }
-    }
+
     const unlike = async () => {
         const val = await unlikeCurrentSong(song.id, albumid)
         if (val) {

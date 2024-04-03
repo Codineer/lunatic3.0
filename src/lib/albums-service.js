@@ -36,3 +36,15 @@ export const getlikedAlbums = async () => {
     })
     return Albums
 }
+
+export const getTopAlbums = async () => {
+    const topFiveSongs = await db.album.findMany(
+        {
+            take: 5, // Limit the result to the first five songs
+            orderBy: {
+                likes: 'desc'
+            },
+        }
+    )
+    return topFiveSongs
+}

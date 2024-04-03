@@ -119,3 +119,15 @@ export const getSongsfromPlaylist = async (playlistId) => {
     )
     return songs
 }
+
+export const getTopPlaylists = async () => {
+    const topFiveSongs = await db.playlist.findMany(
+        {
+            take: 5, // Limit the result to the first five songs
+            orderBy: {
+                likes: 'desc'
+            },
+        }
+    )
+    return topFiveSongs
+}

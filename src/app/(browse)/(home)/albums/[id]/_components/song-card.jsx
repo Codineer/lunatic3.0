@@ -18,7 +18,7 @@ import {
 
 export const SongCard = ({ index, song, playlists }) => {
     const [isLiked, setIsLiked] = useState(song.isliked)
-    const currentUrl = window.location.href;
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
     const albumid = currentUrl.split('/').pop();
     const like = async (e) => {
         e.stopPropagation();

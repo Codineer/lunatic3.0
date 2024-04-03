@@ -1,15 +1,23 @@
 'use client'
 import { cn } from "@/lib/utils"
 import { useSidebar } from "@/store/use-sidebar.js"
-import { UserButton } from "@clerk/nextjs"
-import { useMediaQuery } from "@uidotdev/usehooks"
+import { useMediaQuery } from "react-responsive"
 import { useEffect } from "react"
 export const Wrapper = ({ children }) => {
     const {
         collapsed,
         onCollapse,
         onExpand } = useSidebar(state => state)
-    const matches = useMediaQuery("(max-width: 1023.9px)")
+
+
+
+    var matches = useMediaQuery({
+        query: "(max-width: 1023.9px)"
+    })
+
+
+
+
     useEffect(() => {
         if (matches) {
             console.log(collapsed)
