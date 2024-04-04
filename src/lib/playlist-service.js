@@ -131,3 +131,13 @@ export const getTopPlaylists = async () => {
     )
     return topFiveSongs
 }
+export const deletePlaylists = async (playlistId) => {
+    const playlist = await db.playlist.delete({
+
+        where: {
+            id: playlistId
+        }
+    }
+    )
+    return playlist
+}

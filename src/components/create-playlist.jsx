@@ -20,6 +20,10 @@ const CreatePlaylist = ({ padding = 1 }) => {
     const createPlaylistOnClick = () => {
         startTransition(async () => {
             try {
+                if (data.includes(" ")) {
+                    toast.message("spaces not allowed")
+                    return
+                }
                 if (!data) {
                     return
                 }

@@ -20,7 +20,7 @@ const HomeLayout = ({ children }) => {
           </Navbar>
 
           <Suspense fallback={<ChildrenSkeleton />}>
-            <ScrollArea className="w-full h-[700px] lg:[900px]">
+            <ScrollArea className="w-full h-[calc(100%-70px)] ">
               {children}
 
             </ScrollArea>
