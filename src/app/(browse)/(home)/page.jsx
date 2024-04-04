@@ -15,6 +15,7 @@ const Home = async () => {
   const topAlbums = await getTopAlbums()
 
   return (
+
     <div className='m-4 text-[30px] font-semibold'>
       Popular Albums
       <div className='p-10'>
@@ -75,6 +76,7 @@ const Home = async () => {
         </div>
       </div>
     </div >
+
   )
 }
 

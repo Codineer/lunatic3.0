@@ -5,6 +5,8 @@ import { Playbar } from '@/components/playbar'
 import { Suspense } from 'react'
 import { ChildrenSkeleton } from '@/components/children-skeleton'
 import { UserItemSkeleton } from '@/components/sidebar-skeleton'
+import { ScrollArea } from '@/components/ui/scroll-area'
+
 const HomeLayout = ({ children }) => {
   return (
     <>
@@ -18,7 +20,10 @@ const HomeLayout = ({ children }) => {
           </Navbar>
 
           <Suspense fallback={<ChildrenSkeleton />}>
-            {children}
+            <ScrollArea className="w-full h-[700px] lg:[900px]">
+              {children}
+
+            </ScrollArea>
 
           </Suspense>
 
