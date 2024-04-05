@@ -15,12 +15,15 @@ const LikedSongs = async () => {
     const songs = await fetchAndUpdateDurations(LikedSongs.map(element => element.song))
     const playlists = await getUserPlaylistsFromDatabase()
     return (
-        <div>
+        <div className='absolute w-full h-full top-0 bg-gradient-to-b from-red-900 to-black p-2 '>
+
             <Suspense fallback={<ChildrenSkeleton />}>
                 <Header username={user.username} length={songs.length} songs={songs} />
                 <Songs songs={songs} playlists={playlists} />
 
             </Suspense>
+
+
         </div>
     )
 }

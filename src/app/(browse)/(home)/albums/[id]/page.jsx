@@ -13,7 +13,8 @@ const Album = async ({ params }) => {
   const playlists = await getUserPlaylistsFromDatabase()
   const islikedAlbum = await isLikedAlbum(params.id)
   return (
-    <div>
+    <div className='absolute w-full h-full top-0 bg-gradient-to-b from-purple-950 to-black p-2 '>
+
       <Header album={album} length={songs.length} isliked={islikedAlbum} songs={songs} />
       <Songs songs={songs} playlists={playlists} />
     </div>

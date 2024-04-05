@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/popover"
 import { ScrollArea } from '@/components/ui/scroll-area'
 
-const BottomSection = () => {
+const BottomSection = ({ ranlist }) => {
   const { collapsed } = useSidebar(state => state)
   const [currentList, setcurrentList] = useState(1)
   return (
@@ -40,7 +40,7 @@ const BottomSection = () => {
           <Hint content={"Liked Songs"}>
             <Button onClick={() => { setcurrentList(1) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 1 && "bg-[#1e1e1e]")}>Songs</Button>
           </Hint>
-          <Hint content={"Liked Playlists"}>
+          <Hint content={"User Playlists"}>
             <Button onClick={() => { setcurrentList(2) }} variant="outline" size="sm" className={cn("rounded-full", currentList == 2 && "bg-[#1e1e1e]")}>Playlists</Button>
           </Hint>
           {/* <Hint content={"Liked Albums"}>
@@ -53,8 +53,8 @@ const BottomSection = () => {
       </div>
       <ScrollArea className="my-4 h-96 w-full rounded-md border-0">
 
-        {currentList === 1 && <LikedSidebarSongs />}
-        {currentList === 2 && <LikedSidebarPlaylist />}
+        {currentList === 1 && <LikedSidebarSongs likedSongs={ranlist[0]} />}
+        {currentList === 2 && <LikedSidebarPlaylist userPlaylists={ranlist[1]} />}
 
       </ScrollArea>
     </div>

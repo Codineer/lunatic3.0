@@ -16,7 +16,7 @@ const Home = async () => {
 
   return (
 
-    <div className='m-4 text-[30px] font-semibold'>
+    <div className='p-4 text-[30px] font-semibold bg-gradient-to-b from-zinc-800 to-black'>
       Popular Albums
       <div className='p-10'>
         <Carousel className="w-[185px] md:w-[385px] lg:w-[1000px]">

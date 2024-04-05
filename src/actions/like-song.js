@@ -9,6 +9,7 @@ export const likeCurrentSong = async (songId, albumId) => {
     if (val) {
         revalidatePath(`/album/${albumId}`)
         revalidatePath(`/likedsongs`)
+        revalidatePath(`/`)
     }
 
     return val
@@ -19,6 +20,8 @@ export const unlikeCurrentSong = async (songId, albumId) => {
     if (val) {
         revalidatePath(`/album/${albumId}`)
         revalidatePath(`/likedsongs`)
+        revalidatePath(`/`)
+
 
     }
 

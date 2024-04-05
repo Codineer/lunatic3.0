@@ -10,7 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 const HomeLayout = ({ children }) => {
   return (
     <>
-      <div className='w-screen h-screen p-2 flex gap-2 bg-black overflow-y-hidden ' >
+      <div className='w-screen h-screen p-2 flex gap-2 bg-black overflow-y-hidden relative' >
         <Suspense fallback={<UserItemSkeleton />}>
           <Sidebar />
 
@@ -20,6 +20,7 @@ const HomeLayout = ({ children }) => {
           </Navbar>
 
           <Suspense fallback={<ChildrenSkeleton />}>
+
             <ScrollArea className="w-full h-[calc(100%-70px)] ">
               {children}
 

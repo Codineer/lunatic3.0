@@ -22,7 +22,8 @@ const Playlist = async ({ params }) => {
     const playlists = (await getUserPlaylistsFromDatabase()).filter(playlist => playlist.playlistName !== params.playlist)
     const islikedPlaylist = await isLikedPlaylist(playlist.id)
     return (
-        <div>
+        <div className='absolute w-full h-full top-0 bg-gradient-to-b from-purple-950 to-black p-2 '>
+
             <Header playlist={playlist} length={songs.length} isliked={islikedPlaylist} songs={songs} isCreator={isCreator} />
             <Songs songs={songs} playlists={playlists} playlist={playlist} />
         </div>

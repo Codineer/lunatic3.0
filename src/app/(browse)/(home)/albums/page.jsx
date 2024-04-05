@@ -4,8 +4,12 @@ const Albums = async () => {
   const allAlbums = await getAllAlbums()
   return (
     <>
-      <h1 className='text-2xl font-semibold p-2'>All Albums</h1>
-      <AlbumCards albums={allAlbums} />
+      <div className='absolute w-full h-full top-0 bg-gradient-to-b from-green-900 to-black p-2 '>
+
+        <h1 className='text-2xl font-semibold p-2'>All Albums</h1>
+        <AlbumCards albums={allAlbums} />
+
+      </div>
     </>
   )
 }

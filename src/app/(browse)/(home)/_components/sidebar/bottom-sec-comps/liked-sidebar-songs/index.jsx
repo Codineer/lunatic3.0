@@ -1,11 +1,9 @@
 import React from 'react'
 import { useSidebar } from '@/store/use-sidebar'
-import { useEffect, useState } from 'react'
 import { Songcard } from './song-card'
-import { getLikedSongs } from '@/actions/get-likedsongs-for-sidebar'
 import { useCurrentSong } from '@/store/use-current-song'
 import { useCurrentSongObject } from '@/store/use-current-songList'
-export const LikedSidebarSongs = () => {
+export const LikedSidebarSongs = ({ likedSongs }) => {
     const { currentSong, setCurrentSong } = useCurrentSong(state => state)
     const { currentSongObject, setCurrentSongObject } = useCurrentSongObject(state => state)
     const changeCurrentSongobject = (song) => {
@@ -21,16 +19,8 @@ export const LikedSidebarSongs = () => {
             setCurrentSong(song)
         }
     }
-    const [likedSongs, setLikedSongs] = useState([])
     const collapsed = useSidebar(state => state.collapsed)
-    const retreiveSongs = async () => {
-        const likedSongs = (await getLikedSongs()).map(entry => entry.song)
-        setLikedSongs(likedSongs)
 
-    }
-    useEffect(() => {
-        retreiveSongs()
-    }, []);
 
     return (
 
